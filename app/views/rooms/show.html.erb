@@ -1,0 +1,74 @@
+<div class="text-center">
+  <h1  style="color:#91a0d8;"><i class="fas fa-door-open"></i> 部屋情報</h1>
+</div>
+  <div id="edit" style="margin:1em;">
+    <%= link_to '予約枠の作成','allocation/new/' + @room.id.to_s, class: "btn"%>
+    <%= link_to '部屋情報の更新',edit_room_path(@room), class: "btn"%>
+    <%= link_to 'この部屋を削除する', @room, method: :delete, data: { confirm: '本当に削除してよろしいですか？' }, class: "btn" %>
+  </div>
+
+<div class="row">
+  <div class="col-sm-6 offset-sm-3">
+
+      <div>
+          部屋名：<%= @room.name %>
+      </div>
+      
+      <div>
+          施設id：<%= @room.facility_id %>
+      </div>
+      
+      <div>
+          目的：<%= @room.purpose %>
+      </div>
+      
+      <div>
+          価格：<%= @room.price %>
+      </div>
+      <div>
+          最大収容人数：<%= @room.maximum_capacity %>
+      </div>
+  </div>
+</div>
+
+<table class="mt-4 table table-striped table-bordered" style='text-align: center;'>
+    <thead>
+        <tr>
+          <th> 時刻 </th>
+          <% for i in 0..6 %>
+            <th> <%= (Date.current + i.day).month.to_s + '/' + (Date.current + i.day).day.to_s + '(' + %w(日 月 火 水 木 金 土)[(Date.current + i.day).wday]  + ')'  %> </th>
+          <% end %>
+        </tr>
+    </thead>
+    <tbody>
+      <% for k in 0..8 %>
+        <tr>
+          <td> <%= (k+9).to_s + ':00 ~' +  (k+10).to_s + ':00' %>  </td>
+          <% for i in 0..6 %>
+            <% tmp = @allocations.detect{|allocation| allocation.date.day.to_s == (Date.current + i.day).day.to_s && allocation.timeslot.time_start.hour ==  (k+9)}  %>
+            <% if !tmp.nil?  %>
+              <td>
+                <% link = 'reservation/new/' + tmp.id.to_s %>
+                <a href= <%= link %>>  ◯ </a>
+              </td>
+            <% else %>
+              <td> × </td>
+            <% end %>
+          <% end %>
+        </tr>
+      <% end %>
+    </tbody>
+</table>
+
+<!-- <div class="card-columns">
+  <% @allocations.each_with_index do |allocation, i| %>
+      <% link = '/allocations/' + allocation.id.to_s %>
+      <a href= <%= link %> >
+          <div class="card" style="background-color:#91a0d8; color:white;">
+            <div class="card-body text-center">
+              <p class="card-text"><%= allocation.id %></p>
+            </div>
+          </div>
+      </a>
+  <% end %>
+</div> -->

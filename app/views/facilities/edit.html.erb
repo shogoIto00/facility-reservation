@@ -1,0 +1,41 @@
+<div class="text-center">
+  <h1  style="color:#91a0d8;"><i class="fas fa-landmark"></i> 施設情報更新</h1>
+</div>
+
+<div class="row">
+  <div class="col-sm-6 offset-sm-3">
+      
+
+    <%= form_with(model: @facility, local: true) do |f| %>
+      <%= render 'layouts/error_messages', model: f.object %>
+      
+      <div class="form-group">
+        <%= f.label :name, '名称' %>
+        <%= f.text_field :name, class: 'form-control' %>
+      </div>
+
+      <div class="form-group">
+        <%= f.label :address, '住所' %>
+        <%= f.text_field :address, class: 'form-control' %>
+      </div>
+
+      <div class="form-group">
+        <%= f.label :access, 'アクセス' %>
+        <%= f.text_field :access, class: 'form-control' %>
+      </div>
+      
+      <div class="field">
+        <%= f.label :photo, '写真' %>
+        <%= f.file_field :photo%>
+      </div>
+      
+      
+      <div id='edit'>
+      <%= f.submit '施設情報更新', class: 'btn btn-block' %>
+      </div>
+      
+      
+      
+    <% end %>
+  </div>
+</div>

@@ -1,0 +1,21 @@
+<div class="text-center">
+<h1  style="margin-top:1em; color:#91a0d8;"><i class="fas fa-calendar-check"></i>  あなたの予約</h1>
+</div>
+
+
+<div class="card-columns">
+  <% @reservations.each_with_index do |reservation,i| %>
+      <% link = '/reservations/' + reservation.id.to_s %>
+      <a href= <%= link %> >
+          <div class="card" style="background-color:#91a0d8; color:white;">
+            <div class="card-body text-left">
+              <p class="card-text">名称：<%= reservation.id %></p>
+            </div>
+          </div>
+      </a>
+  <% end %>
+</div>
+
+<div id="edit" style="margin:1em;">
+<a class="btn btn-md" href="/" role="button" style="margin:1em;">トップに戻る</a>
+</div>

@@ -1,0 +1,17 @@
+<div class="text-center">
+  <h1  style="color:#91a0d8;"><i class="fas fa-clock"></i>時間枠情報</h1>
+</div>
+
+<div id="edit" style="margin:1em;">
+  <%= link_to '時間枠情報の更新',edit_timeslot_path(@timeslot), class: "btn" %>
+  <%= link_to 'この時間枠を削除する', @timeslot, method: :delete, data: { confirm: '本当に削除してよろしいですか？' }, class: "btn" %>
+</div>
+
+<div class="row">
+  <div class="col-sm-4">
+     <div >
+          <p class="card-text">曜日：<%= @timeslot.day_of_the_week %></p>
+          <p class="card-text">開始時間：<%= @timeslot.time_start %></p>
+          <p class="card-text">終了時間：<%= @timeslot.time_finish %></p>
+      </div>
+  </div>

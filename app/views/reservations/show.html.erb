@@ -1,0 +1,40 @@
+<div class="text-center">
+  <h1  style="color:#91a0d8;"><i class="fas fa-calendar-check"></i> 予約確認</h1>
+</div>
+  <div id="edit" style="margin:1em;">
+    <%#= link_to '予約枠情報の更新',edit_allocation_path(@allocation), class: "btn"%>
+    <%#= link_to 'この予約枠を削除する', @allocation, method: :delete, data: { confirm: '本当に削除してよろしいですか？' }, class: "btn" %>
+  </div>
+
+<div class="row">
+  <div id="edit" style="margin:1em;">
+    <% link_index = '/reservations/' %> 
+    <a href= <%= link_index %> > あなたの予約一覧を見る</a>
+    <a href= '/'> トップへ戻る</a>
+  </div>
+  
+  <div class="col-sm-6 offset-sm-3">
+  
+    <div>
+        予約者：<%= @reservation.user.name %>
+    </div>
+
+    <div>
+        施設名：<%= @reservation.allocation.room.facility.name %>
+    </div>
+    
+    <div>
+        部屋名：<%= @reservation.allocation.room.name %>
+    </div>
+    
+    <div>
+        日時：<%= @reservation.allocation.date %> <%= @reservation.allocation.timeslot.time_start %> ~ <%= @reservation.allocation.timeslot.time_finish %>
+    </div>
+    
+    <div>
+        料金：<%= @reservation.allocation.room.price %> 円
+    </div>
+  </div>
+  
+</div>
+

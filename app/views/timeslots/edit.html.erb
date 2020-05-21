@@ -1,0 +1,32 @@
+<div class="text-center">
+  <h1  style="color:#91a0d8;"><i class="fas fa-clock"></i>時間枠情報更新</h1>
+</div>
+
+<div class="row">
+  <div class="col-sm-6 offset-sm-3">
+    
+    <%= form_with(model: @timeslot, local: true) do |f| %>
+      <%= render 'layouts/error_messages', model: f.object %>
+      
+      <div class="form-group">
+        <%= f.label :day_of_the_week, '曜日' %>
+        <%= f.text_field :day_of_the_week, class: 'form-control' %>
+      </div>
+
+      <div class="form-group">
+        <%= f.label :time_start, '開始時刻' %>
+        <%= f.time_field :time_start, class: 'form-control' %>
+      </div>
+
+      <div class="form-group">
+        <%= f.label :time_finish, '終了時刻' %>
+        <%= f.time_field :time_finish, class: 'form-control' %>
+      </div>
+      
+      <div id='edit'>
+      <%= f.submit '時間枠更新', class: 'btn btn-block' %>
+      </div>
+      
+    <% end %>
+  </div>
+</div>

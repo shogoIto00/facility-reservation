@@ -1,0 +1,23 @@
+<div class="text-center">
+  <h1  style="color:#91a0d8;">ユーザ情報</h1>
+</div>
+
+<div class="row">
+  <div class="col-sm-6 offset-sm-3">
+      <div>
+          氏名：<%= @user.name %>
+      </div>
+      
+      <div>
+          メール：<%= @user.email %>
+      </div>
+      
+      <div>
+          パスワード：**********
+      </div>
+      
+      <div id="edit" style="margin:1em;">
+     <%= link_to 'ユーザ情報編集',edit_user_path(@user), class: "btn"%>
+     </div>
+  </div>
+</div>

@@ -1,0 +1,23 @@
+<h1  style="margin-top:1em; color:#91a0d8;"><i class="fas fa-clock"></i>  時間枠一覧</h1>
+
+<div id="edit" style="margin:1em;">
+<%= link_to '新規時間枠作成',new_timeslot_path, class: "btn"%>
+</div>
+
+<div class="card-columns">
+  <% @timeslots.each_with_index do |timeslot,i| %>
+      <% link = '/timeslots/' + timeslot.id.to_s %>
+      <a href= <%= link %> >
+          <div class="card" style="background-color:#91a0d8; color:white;">
+            <div class="card-body">
+              <p class="card-text">曜日：<%= timeslot.day_of_the_week %></p>
+              <p class="card-text">開始時間：<%= timeslot.time_start %></p>
+              <p class="card-text">終了時間：<%= timeslot.time_finish %></p>
+            </div>
+          </div>
+      </a>
+  <% end %>
+</div>
+<div id="edit" style="margin:1em;">
+<a class="btn btn-md" href="/" role="button" style="margin:1em;">トップに戻る</a>
+</div>

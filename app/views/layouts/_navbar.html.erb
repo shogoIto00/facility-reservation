@@ -1,0 +1,44 @@
+<header class="mb-4">
+  <nav class="navbar navbar-expand-sm">
+    <a class="navbar-brand" href="/">くらうど市施設予約サイト</a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent">
+      <span class="navbar-toggler-icon">施設紹介 </span>
+    </button>
+    
+    <div class="collapse navbar-collapse" id="Navber">
+      <ul class="navbar-nav mr-auto">
+        <li class="nav-item active">
+          <a class="nav-link" href="#">ホーム <span class="sr-only">(現位置)</span></a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="/facilities"> 施設紹介</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="/reservations"> 予約状況</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="/timeslots"> 時間枠</a>
+        </li>
+      </ul>
+    </div>
+
+    <div class="collapse navbar-collapse justify-content-end" id="navbarSupportedContent">
+      <ul class="navbar-nav">
+        <% if logged_in? %>
+        <li class="nav-item dropdown">
+            <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown"><%= current_user.name %></a>
+            <ul class="dropdown-menu dropdown-menu-right">
+              <li class="dropdown-item"><%= link_to 'プロファイル', user_path(current_user) %></li>
+              <li class="dropdown-divider"></li>
+              <li class="dropdown-item"><%= link_to 'ログアウト', logout_path, method: :delete %></li>
+            
+            </ul>
+          </li>
+        <% else %>
+        <li class="nav-item"><%= link_to '新規ユーザ登録', signup_path, class: 'nav-link' %></li>
+        <li class="nav-item"><%= link_to 'ログイン', login_path, class: 'nav-link' %></li>
+        <% end %>
+      </ul>
+    </div>
+  </nav>
+</header>

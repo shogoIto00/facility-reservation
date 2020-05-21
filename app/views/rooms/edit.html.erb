@@ -1,0 +1,36 @@
+<div class="text-center">
+  <h1  style="color:#91a0d8;"><i class="fas fa-door-open"></i> 部屋情報更新</h1>
+</div>
+
+<div class="row">
+  <div class="col-sm-6 offset-sm-3">
+      
+
+    <%= form_with(model: @room, local: true) do |f| %>
+      <%= render 'layouts/error_messages', model: f.object %>
+      
+      <div class="form-group">
+        <%= f.label :name, '部屋名' %>
+        <%= f.text_field :name, class: 'form-control' %>
+      </div>
+
+      <div class="form-group">
+        <%= f.label :purpose, '目的' %>
+        <%= f.text_field :purpose, class: 'form-control' %>
+      </div>
+
+      <div class="form-group">
+        <%= f.label :price, '料金' %>
+        <%= f.number_field :price, class: 'form-control' %>
+      </div>
+      
+      <div class="form-group">
+        <%= f.label :maximum_capacity, '最大収容人数' %>
+        <%= f.number_field :maximum_capacity, class: 'form-control' %>
+      </div>
+      <div id="edit">
+      <%= f.submit '部屋情報更新', class: 'btn btn-block' %>
+      </div>
+    <% end %>
+  </div>
+</div>

@@ -1,0 +1,60 @@
+rails g model User name:string email:string password_digest:string administrator:boolean
+rails db:migrate
+
+rails g model Facility name:string address:string access:string photo:binary
+rails db:migrate
+
+rails g model Timeslot day_of_the_week:string time_start:time time_finish:time
+rails db:migrate
+
+rails g model Room name:string facility:references purpose:string price:integer maximum_capacity:integer
+rails db:migrate
+
+rails g model Allocation room:references timeslot:references status:string date:date
+rails db:migrate
+
+rails g model Reservation user:references allocation:references status:string
+rails db:migrate
+
+rails g controller Users
+rails g controller Facilities
+rails g controller Timeslots
+rails g controller Rooms
+rails g controller Allocations
+rails g controller Reservations
+rails g controller sessions 
+
+rails c をした上で、
+newfa = Facility.new(name: 'クラウド市', address: 'いろは町 5-7-10',access: '最寄駅から徒歩10分')
+newfa.save
+
+rails g helper sessions
+
+rails c をした上で、(月-日について)
+ti = Timeslot.new(day_of_the_week: "日", time_start: '9:00', time_finish: '10:00')
+ti.save
+
+ti2 = Timeslot.new(day_of_the_week: "日", time_start: '10:00', time_finish: '11:00')
+ti2.save
+
+ti3 = Timeslot.new(day_of_the_week: "日", time_start: '11:00', time_finish: '12:00')
+ti3.save
+
+ti4 = Timeslot.new(day_of_the_week: "日", time_start: '12:00', time_finish: '13:00')
+ti4.save
+
+ti5 = Timeslot.new(day_of_the_week: "日", time_start: '13:00', time_finish: '14:00')
+ti5.save
+
+ti6 = Timeslot.new(day_of_the_week: "日", time_start: '14:00', time_finish: '15:00')
+ti6.save
+
+ti7 = Timeslot.new(day_of_the_week: "日", time_start: '16:00', time_finish: '17:00')
+ti7.save
+
+ti8 = Timeslot.new(day_of_the_week: "日", time_start: '15:00', time_finish: '16:00')
+ti8.save
+
+ti9 = Timeslot.new(day_of_the_week: "日", time_start: '17:00', time_finish: '18:00')
+ti9.save
+

@@ -1,0 +1,33 @@
+<div class="text-center">
+  <h1  style="color:#91a0d8;"><i class="fas fa-door-open"></i> 以下の内容で予約してよろしいですか？ </h1>
+</div>
+
+<div class="row">
+  <div class="col-sm-6 offset-sm-3">
+      
+
+    <%= form_with(model: @reservation, local: true) do |f| %>
+      <%= render 'layouts/error_messages', model: f.object %>
+      <div class="form-group">
+        <%= f.label :allocation_id, '予約枠id' %>
+        <%= f.number_field :allocation_id, class: 'form-control', value: params[:allocation_id] , readonly: true %>
+      </div>
+      
+      <div class="form-group">
+        <%= f.label :user_id, 'ユーザid' %>
+        <%= f.number_field :user_id, class: 'form-control', value: @user.id , readonly: true %>
+      </div>
+      
+      <div class="form-group">
+        <%= f.label :status, '状態' %>
+        <%= f.text_field :status, class: 'form-control', value: '予約' , readonly: true  %>
+      </div>
+      
+      
+      <div id='edit'>
+      <%= link_to "戻る", :back %>
+      <%= f.submit 'OK', class: 'btn' %>
+      </div>
+    <% end %>
+  </div>
+</div>
