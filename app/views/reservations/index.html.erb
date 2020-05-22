@@ -2,19 +2,30 @@
 <h1  style="margin-top:1em; color:#91a0d8;"><i class="fas fa-calendar-check"></i>  あなたの予約</h1>
 </div>
 
-
+<h3>これからの予約</h3>
 <div class="card-columns">
   <% @reservations.each_with_index do |reservation,i| %>
-      <% link = '/reservations/' + reservation.id.to_s %>
-      <a href= <%= link %> >
-          <div class="card" style="background-color:#91a0d8; color:white;">
-            <div class="card-body text-left">
-              <p class="card-text">名称：<%= reservation.id %></p>
-            </div>
-          </div>
-      </a>
+    <% link = '/reservations/' + reservation.id.to_s %>
+    <a href= <%= link %> >
+      <div class="card" style="background-color:#91a0d8; color:white;">
+        <div class="card-header"style="background-color:#c1d3ea; color:white;">
+          <a style='text-align: left' class = "btn btn-primary" href= <%="/reservations/" + reservation.id.to_s + '/edit'%> > 予約情報の更新 </a>
+          <a style='text-align: right;'><%= link_to 'キャンセル', reservation, method: :delete, data: { confirm: '本当にキャンセルしてよろしいですか？' }, class: "btn btn-danger" %></a>
+        </div>
+        <div class="card-body text-left" style='color:white;'>
+          <p class="card-text">施設名：<%= reservation.allocation.room.facility.name %> </p>
+          <p class="card-text">部屋名：<%= reservation.allocation.room.name %></p>
+          <p class="card-text">日時：<%= reservation.allocation.date.month %>月 <%= reservation.allocation.date.day %>日
+          <%= reservation.allocation.timeslot.time_start.hour %>:00 ~ <%= reservation.allocation.timeslot.time_finish.hour %>:00
+          <p class="card-text">料金：<%= reservation.allocation.room.price %> 円</p>
+          <p class="card-text">状況：<%= reservation.status %></p>
+        </div>
+      </div>
+    </a>
   <% end %>
 </div>
+
+<h3 style='margin-top: 1em;'>これまでの予約</h3>
 
 <div id="edit" style="margin:1em;">
 <a class="btn btn-md" href="/" role="button" style="margin:1em;">トップに戻る</a>

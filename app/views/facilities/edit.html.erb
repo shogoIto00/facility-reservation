@@ -24,11 +24,14 @@
         <%= f.text_field :access, class: 'form-control' %>
       </div>
       
-      <div class="field">
-        <%= f.label :photo, '写真' %>
-        <%= f.file_field :photo%>
+      <div id="edit">
+      <label class="btn">
+        写真を追加してください
+        <span style="display:none;">
+          <%= f.file_field :photo, required: false, multiple: false, name: 'photo' %>
+        </span>
+      </label>
       </div>
-      
       
       <div id='edit'>
       <%= f.submit '施設情報更新', class: 'btn btn-block' %>

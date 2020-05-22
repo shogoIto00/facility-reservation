@@ -8,6 +8,7 @@ Rails.application.routes.draw do
   get '/rooms/allocation/new/:room_id', to: 'allocations#new'
   get '/rooms/reservation/new/:allocation_id', to: 'reservations#new'
   delete 'logout', to: 'sessions#destroy'
+  delete '/reservations' => 'reservations#destroy'
   
   resources :users
   resources :facilities

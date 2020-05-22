@@ -27,6 +27,7 @@ class ReservationsController < ApplicationController
   
   def edit
     @reservation = Reservation.find(params[:id])
+    @user = User.find_by(id: session[:user_id])
   end
   
   def update
@@ -45,7 +46,7 @@ class ReservationsController < ApplicationController
     @reservation.destroy
 
     flash[:success] = '予約 は正常にキャンセルされました'
-    redirect_to action: '/reservation'
+    redirect_to '/reservations'
   end
   
   private

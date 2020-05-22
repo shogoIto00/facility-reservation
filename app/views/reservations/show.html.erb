@@ -28,7 +28,8 @@
     </div>
     
     <div>
-        日時：<%= @reservation.allocation.date %> <%= @reservation.allocation.timeslot.time_start %> ~ <%= @reservation.allocation.timeslot.time_finish %>
+        日時：<%= @reservation.allocation.date.month %>月 <%= @reservation.allocation.date.day %>日
+              <%= @reservation.allocation.timeslot.time_start.hour %>:00 ~ <%= @reservation.allocation.timeslot.time_finish.hour %>:00
     </div>
     
     <div>

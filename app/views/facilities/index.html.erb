@@ -11,11 +11,9 @@
       <% link = '/facilities/' + facility.id.to_s %>
       <a href= <%= link %> >
           <div class="card" style="background-color:#91a0d8; color:white;">
+            <% test = 'fa-' + facility.id.to_s + '.jpg' %>
+            <%= image_tag 'fa-' + (i+1).to_s + '.jpg', :class => 'card-img-top' %>
             <div class="card-body text-left">
-              <% test = 'fa-' + facility.id.to_s + '.jpg' %>
-              <p style='text-align: center;'>
-                  <%= image_tag 'fa-' + (i+1).to_s + '.jpg', :size => '315x210' %>
-              </p>
               <p class="card-text">名称：<%= facility.name %></p>
               <p class="card-text">住所：<%= facility.address %></p>
               <p class="card-text">アクセス：<%= facility.access %></p>

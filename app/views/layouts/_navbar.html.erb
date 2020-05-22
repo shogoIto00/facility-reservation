@@ -1,27 +1,33 @@
 <header class="mb-4">
-  <nav class="navbar navbar-expand-sm">
-    <a class="navbar-brand" href="/">くらうど市施設予約サイト</a>
-    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent">
-      <span class="navbar-toggler-icon">施設紹介 </span>
+  <nav class="navbar navbar-expand-md">
+    
+    <button type="button" class="navbar-toggler" data-toggle="collapse" data-target="#navbarSupportedContent" style='color:white;'>
+        <span class="navbar-toggler-icon" style='color:white;' ></span>
     </button>
     
-    <div class="collapse navbar-collapse" id="Navber">
+    <a class="navbar-brand" href="/">くらうど市施設予約サイト</a>
+    
+    
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
       <ul class="navbar-nav mr-auto">
-        <li class="nav-item active">
-          <a class="nav-link" href="#">ホーム <span class="sr-only">(現位置)</span></a>
+        <li class="nav-item <%= 'active' if current_page?("/") %>">
+          <a class="nav-link" href="/"> ホーム </a>
         </li>
-        <li class="nav-item">
+        <li class= "nav-item <%= 'active' if controller.controller_name == 'facilities' %>" >
           <a class="nav-link" href="/facilities"> 施設紹介</a>
         </li>
-        <li class="nav-item">
+        <% if logged_in? %>
+        <li class="nav-item <%= 'active' if controller.controller_name == 'reservations' %>">
           <a class="nav-link" href="/reservations"> 予約状況</a>
         </li>
-        <li class="nav-item">
+        
+        <li class="nav-item <%= 'active' if controller.controller_name == 'timeslots' %>">
           <a class="nav-link" href="/timeslots"> 時間枠</a>
         </li>
+        <% end %>
       </ul>
     </div>
-
+    
     <div class="collapse navbar-collapse justify-content-end" id="navbarSupportedContent">
       <ul class="navbar-nav">
         <% if logged_in? %>
@@ -31,7 +37,6 @@
               <li class="dropdown-item"><%= link_to 'プロファイル', user_path(current_user) %></li>
               <li class="dropdown-divider"></li>
               <li class="dropdown-item"><%= link_to 'ログアウト', logout_path, method: :delete %></li>
-            
             </ul>
           </li>
         <% else %>
@@ -39,6 +44,14 @@
         <li class="nav-item"><%= link_to 'ログイン', login_path, class: 'nav-link' %></li>
         <% end %>
       </ul>
+      <form class="form-inline my-2 my-lg-0">
+        <input class="form-control mr-sm-2" type="search" placeholder="検索..." aria-label="Search">
+        <div id='edit'> <button class="btn my-2 my-sm-0" type="submit">検索</button><div>
+      </form>
     </div>
+    
+    
+
+    
   </nav>
 </header>
