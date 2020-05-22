@@ -3,6 +3,9 @@ class RoomsController < ApplicationController
   
   def show
     @room = Room.find(params[:id])
+    @rooms = Room.where(facility_id: @room.facility_id)
+    @index = @rooms.index { |n| n.id == @room.id } +1
+    
     from  = Time.current.at_beginning_of_day
     to = (from + 7.day).at_end_of_day
     @resercatioin = Reservation.all

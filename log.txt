@@ -65,3 +65,13 @@ reserv_id = []
 res.each do |re| 
     reserv_id.push(re.allocation_id)
 end
+
+(1..4).each do |num_room|
+    (1..9).each do |num_timeslot|
+        (6..9).each do |month|
+            (1..30).each do |day|
+              Allocation.create(room_id: num_room , timeslot_id: num_timeslot, status: '利用可',date: '2020-' + month.to_s + '-' + day.to_s )
+            end
+        end
+    end
+end
