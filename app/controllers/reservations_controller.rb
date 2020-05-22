@@ -1,11 +1,17 @@
 class ReservationsController < ApplicationController
+  before_action :require_user_logged_in, only: [:index, :show, :destroy]
+  before_action :require_user_administrator, only: [:edit]
   
   def index
-    @reservations = Reservation.all
+    if @current_user.administrator
+      @reservations = Reservation.all
+    else
+      @reservations = Reservation.where(id: @current_user.id)
+    end
   end
   
   def show
-    @reservation = Reservation.find(params[:id])
+      @reservation = Reservation.find(params[:id])
   end
   
   def new

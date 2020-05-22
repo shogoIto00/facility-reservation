@@ -1,4 +1,6 @@
 class FacilitiesController < ApplicationController
+  before_action :require_user_administrator, only: [:new, :edit, :destroy]
+  
   def index
     @facilities = Facility.all
   end

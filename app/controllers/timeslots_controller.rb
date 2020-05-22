@@ -1,4 +1,5 @@
 class TimeslotsController < ApplicationController
+  before_action :require_user_administrator
   def index
     @timeslots = Timeslot.all
   end

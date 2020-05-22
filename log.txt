@@ -58,3 +58,10 @@ ti8.save
 ti9 = Timeslot.new(day_of_the_week: "日", time_start: '17:00', time_finish: '18:00')
 ti9.save
 
+Reservation.joins(:allocation).select("reservations.*, allocations.*").first.id
+
+res = Reservation.all
+reserv_id = []
+res.each do |re| 
+    reserv_id.push(re.allocation_id)
+end

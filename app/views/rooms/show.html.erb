@@ -1,11 +1,17 @@
 <div class="text-center">
   <h1  style="color:#91a0d8;"><i class="fas fa-door-open"></i> 部屋情報</h1>
 </div>
-  <div id="edit" style="margin:1em;">
-    <%= link_to '予約枠の作成','allocation/new/' + @room.id.to_s, class: "btn"%>
-    <%= link_to '部屋情報の更新',edit_room_path(@room), class: "btn"%>
-    <%= link_to 'この部屋を削除する', @room, method: :delete, data: { confirm: '本当に削除してよろしいですか？' }, class: "btn" %>
-  </div>
+
+
+<% if logged_in? %>
+  <% if @current_user.administrator %>
+    <div id="edit" style="margin:1em;">
+      <%= link_to '予約枠の作成','allocation/new/' + @room.id.to_s, class: "btn"%>
+      <%= link_to '部屋情報の更新',edit_room_path(@room), class: "btn"%>
+      <%= link_to 'この部屋を削除する', @room, method: :delete, data: { confirm: '本当に削除してよろしいですか？' }, class: "btn" %>
+    </div>
+  <% end %>
+<% end %>
 
 <div class='row'>
   <aside class="col-sm-4">
@@ -65,7 +71,7 @@
                 <% if logged_in? %>
                   <a href= <%= link %> style='color: #1f50c7; vertical-align: middle;'>  <%= (k+9).to_s + ':00 ' %> </a>
                 <% else %>
-                  <a href= '/login' style='color: #1f50c7; vertical-align: middle;'>  ログインして<br>予約する </a>
+                  <a href= '/login' style='color: #1f50c7; vertical-align: middle;'>  ログイン </a>
                 <% end %>
               </td>
             <% else %>

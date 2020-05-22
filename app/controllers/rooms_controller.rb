@@ -1,9 +1,16 @@
 class RoomsController < ApplicationController
+  before_action :require_user_administrator, only: [:new, :edit, :destroy]
+  
   def show
     @room = Room.find(params[:id])
     from  = Time.current.at_beginning_of_day
     to = (from + 7.day).at_end_of_day
-    @allocations = Allocation.where(room_id: params[:id], date: from...to )
+    @resercatioin = Reservation.all
+    @re_id = []
+    @resercatioin.each do |re| 
+      @re_id.push(re.allocation_id)
+    end
+    @allocations = Allocation.where(room_id: params[:id], date: from...to).where.not(id: @re_id)
   end
   
   def new

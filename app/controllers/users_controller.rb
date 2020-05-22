@@ -1,8 +1,16 @@
 class UsersController < ApplicationController
-  before_action :require_user_logged_in, only: [:index, :show]
+  before_action :require_user_logged_in, only: [:show]
+  before_action :require_user_administrator, only: [:index]
+  
+  def index
+    @users = User.all
+  end
   
   def show
     @user = User.find(params[:id])
+    if @user.id != current_user.id 
+      redirect_to '/'
+    end
   end
   
   def new

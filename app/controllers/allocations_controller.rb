@@ -1,4 +1,6 @@
 class AllocationsController < ApplicationController
+  before_action :require_user_logged_in, only: [:show]
+  before_action :require_user_administrator, only: [:new, :edit, :destroy]
   def index
     @allocation = Allocation.all
   end

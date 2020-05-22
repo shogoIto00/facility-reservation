@@ -1,10 +1,13 @@
 <div class="text-center">
 <h1  style="margin-top:1em; color:#91a0d8;"><i class="fas fa-landmark"></i>  施設紹介</h1>
 </div>
-
-<div id="edit" style="margin:1em;">
-<%= link_to '新規施設作成',new_facility_path, class: "btn"%>
-</div>
+<% if logged_in? %>
+  <% if @current_user.administrator %>
+    <div id="edit" style="margin:1em;">
+    <%= link_to '新規施設作成',new_facility_path, class: "btn"%>
+    </div>
+  <% end %>
+<% end %>
 
 <div class="card-columns">
   <% @facilities.each_with_index do |facility,i| %>

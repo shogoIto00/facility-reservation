@@ -1,0 +1,28 @@
+<div class="text-center">
+<h1  style="margin-top:1em; color:#91a0d8;"><i class="fas fa-user"></i> 利用者一覧</h1>
+</div>
+<% if logged_in? %>
+  <% if @current_user.administrator %>
+    <div id="edit" style="margin:1em;">
+    <%= link_to '新規ユーザ作成',new_user_path, class: "btn"%>
+    </div>
+  <% end %>
+<% end %>
+
+<div class="card-columns">
+  <% @users.each_with_index do |user,i| %>
+      <% link = '/users/' + user.id.to_s + '/edit' %>
+      <a href= <%= link %> >
+          <div class="card" style="background-color:#91a0d8; color:white;">
+            <div class="card-body text-left">
+              <p class="card-text">ID：<%= user.id %></p>
+              <p class="card-text">名称：<%= user.name %></p>
+              <p class="card-text">メール：<%= user.email %></p>
+            </div>
+          </div>
+      </a>
+  <% end %>
+</div>
+<div id="edit" style="margin:1em;">
+<a class="btn btn-md" href="/" role="button" style="margin:1em;">トップに戻る</a>
+</div>

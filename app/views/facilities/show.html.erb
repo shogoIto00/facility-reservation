@@ -2,11 +2,15 @@
   <h1  style="color:#91a0d8;"><i class="fas fa-landmark"></i>  施設情報</h1>
 </div>
 
-<div id="edit" style="margin:1em;">
-  <%= link_to '施設情報編集',edit_facility_path(@facility), class: "btn"%>
-  <%= link_to '新規部屋作成', 'room/new/' + @facility.id.to_s, class: "btn" %>
-  <%= link_to 'この施設を削除する', @facility, method: :delete, data: { confirm: '本当に削除してよろしいですか？' }, class: "btn" %>
-</div>
+<% if logged_in? %>
+  <% if @current_user.administrator %>
+    <div id="edit" style="margin:1em;">
+      <%= link_to '施設情報編集',edit_facility_path(@facility), class: "btn"%>
+      <%= link_to '新規部屋作成', 'room/new/' + @facility.id.to_s, class: "btn" %>
+      <%= link_to 'この施設を削除する', @facility, method: :delete, data: { confirm: '本当に削除してよろしいですか？' }, class: "btn" %>
+    </div>
+  <% end %>
+<% end %>
 
 <div class="row">
   <aside class="col-sm-4">

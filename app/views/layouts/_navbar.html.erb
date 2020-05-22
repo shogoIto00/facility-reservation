@@ -13,17 +13,23 @@
         <li class="nav-item <%= 'active' if current_page?("/") %>">
           <a class="nav-link" href="/"> ホーム </a>
         </li>
-        <li class= "nav-item <%= 'active' if controller.controller_name == 'facilities' %>" >
+        <li class= "nav-item <%= 'active' if (controller.controller_name == 'facilities') || controller.controller_name == 'rooms' %>" >
           <a class="nav-link" href="/facilities"> 施設紹介</a>
         </li>
         <% if logged_in? %>
-        <li class="nav-item <%= 'active' if controller.controller_name == 'reservations' %>">
-          <a class="nav-link" href="/reservations"> 予約状況</a>
-        </li>
-        
-        <li class="nav-item <%= 'active' if controller.controller_name == 'timeslots' %>">
-          <a class="nav-link" href="/timeslots"> 時間枠</a>
-        </li>
+          <li class="nav-item <%= 'active' if controller.controller_name == 'reservations' %>">
+            <a class="nav-link" href="/reservations"> 予約状況</a>
+          </li>
+          <% if logged_in? %>
+            <% if @current_user.administrator %>
+              <li class="nav-item <%= 'active' if controller.controller_name == 'timeslots' %>">
+                <a class="nav-link" href="/timeslots"> 時間枠</a>
+              </li>
+              <li class="nav-item <%= 'active' if controller.controller_name == 'users' %>">
+                <a class="nav-link" href="/users"> 利用者一覧</a>
+              </li>
+            <% end %>
+          <% end %>
         <% end %>
       </ul>
     </div>
@@ -40,8 +46,8 @@
             </ul>
           </li>
         <% else %>
-        <li class="nav-item"><%= link_to '新規ユーザ登録', signup_path, class: 'nav-link' %></li>
-        <li class="nav-item"><%= link_to 'ログイン', login_path, class: 'nav-link' %></li>
+        <li class="nav-item <%= 'active' if controller.controller_name == 'users' %>" ><%= link_to '新規ユーザ登録', signup_path, class: 'nav-link' %></li>
+        <li class="nav-item <%= 'active' if controller.controller_name == 'sessions' %>"><%= link_to 'ログイン', login_path, class: 'nav-link' %></li>
         <% end %>
       </ul>
       <form class="form-inline my-2 my-lg-0">
