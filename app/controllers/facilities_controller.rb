@@ -1,8 +1,17 @@
+require 'csv'
+
 class FacilitiesController < ApplicationController
   before_action :require_user_administrator, only: [:new, :edit, :destroy]
   
   def index
     @facilities = Facility.all
+    
+    respond_to do |format|
+      format.html
+      format.csv do |csv|
+        send_facilities_csv(@facilities)
+      end
+    end
   end
   
   def show
@@ -50,7 +59,21 @@ class FacilitiesController < ApplicationController
   end
   
   private
+  
   def facility_params
     params.require(:facility).permit(:name, :address, :access, :photo)
+  end
+  
+  def send_facilities_csv(facilities)
+    csv_data = CSV.generate do |csv|
+      header = %w(name address access)
+      csv << header
+  
+      facilities.each do |facility|
+        values = [facility.name, facility.address, facility.access]
+        csv << values
+      end
+    end
+    send_data(csv_data, filename: "facilities.csv")
   end
 end

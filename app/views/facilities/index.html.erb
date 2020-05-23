@@ -5,6 +5,7 @@
   <% if @current_user.administrator %>
     <div id="edit" style="margin:1em;">
     <%= link_to '新規施設作成',new_facility_path, class: "btn"%>
+    <%= link_to "CSV出力", facilities_path(format: :csv), class: "btn" %>
     </div>
   <% end %>
 <% end %>

@@ -1,7 +1,14 @@
+require 'csv'
 class TimeslotsController < ApplicationController
   before_action :require_user_administrator
   def index
     @timeslots = Timeslot.all
+    respond_to do |format|
+      format.html
+      format.csv do |csv|
+        send_timeslots_csv(@timeslots)
+      end
+    end
   end
   
   def show
@@ -50,5 +57,18 @@ class TimeslotsController < ApplicationController
   private
   def timeslot_params
     params.require(:timeslot).permit(:day_of_the_week, :time_start, :time_finish)
+  end
+  
+  def send_timeslots_csv(timeslots)
+    csv_data = CSV.generate do |csv|
+      header = %w(day_of_the_week time_start time_finish)
+      csv << header
+  
+      timeslots.each do |timeslot|
+        values = [timeslot.day_of_the_week, timeslot.time_start, timeslot.time_finish]
+        csv << values
+      end
+    end
+    send_data(csv_data, filename: "timeslots.csv")
   end
 end

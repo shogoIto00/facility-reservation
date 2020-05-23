@@ -1,5 +1,16 @@
+require 'csv'
+
 class RoomsController < ApplicationController
   before_action :require_user_administrator, only: [:new, :edit, :destroy]
+  def index
+    @rooms = Room.all
+    respond_to do |format|
+      format.html
+      format.csv do |csv|
+        send_rooms_csv(@rooms)
+      end
+    end
+  end
   
   def show
     @room = Room.find(params[:id])
@@ -59,5 +70,18 @@ class RoomsController < ApplicationController
 
   def room_params
     params.require(:room).permit(:name, :purpose, :price, :maximum_capacity, :facility_id)
+  end
+  
+  def send_rooms_csv(rooms)
+    csv_data = CSV.generate do |csv|
+      header = %w(facility_id name purpose price maximum_capacity)
+      csv << header
+  
+      rooms.each do |room|
+        values = [room.facility_id, room.name, room.purpose, room.price, room.maximum_capacity]
+        csv << values
+      end
+    end
+    send_data(csv_data, filename: "rooms.csv")
   end
 end

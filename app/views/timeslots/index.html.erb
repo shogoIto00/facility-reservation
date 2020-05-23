@@ -2,6 +2,7 @@
 
 <div id="edit" style="margin:1em;">
 <%= link_to '新規時間枠作成',new_timeslot_path, class: "btn"%>
+<%= link_to "CSV出力", timeslots_path(format: :csv), class: "btn" %>
 </div>
 
 <div class="card-columns">

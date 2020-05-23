@@ -1,3 +1,5 @@
+require 'csv'
+
 class UsersController < ApplicationController
   before_action :require_user_logged_in, only: [:show]
   before_action :require_user_administrator, only: [:index]

@@ -5,6 +5,13 @@
 <div class="row">
   <div class="col-sm-6 offset-sm-3">
       
+    <% if logged_in? %>
+      <% if @current_user.administrator %>
+        <div id="edit" style="margin:1em;">
+        <%= link_to "CSV出力", allocations_path(format: :csv), class: "btn" %>
+        </div>
+      <% end %>
+    <% end %>
 
     <%= form_with(model: @allocation, local: true) do |f| %>
       <%= render 'layouts/error_messages', model: f.object %>

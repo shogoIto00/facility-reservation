@@ -1,8 +1,17 @@
+require 'csv'
+
 class AllocationsController < ApplicationController
   before_action :require_user_logged_in, only: [:show]
   before_action :require_user_administrator, only: [:new, :edit, :destroy]
   def index
-    @allocation = Allocation.all
+    @allocations = Allocation.all
+    
+    respond_to do |format|
+      format.html
+      format.csv do |csv|
+        send_allocations_csv(@allocations)
+      end
+    end
   end
   
   def show
@@ -35,10 +44,10 @@ class AllocationsController < ApplicationController
   def update
     @allocation = Allocation.find(params[:id])
     if @allocation.update(allocation_params)
-      flash[:success] = '時間枠 は正常に更新されました'
+      flash[:success] = '予約枠 は正常に更新されました'
       redirect_to  @allocation
     else
-      flash.now[:danger] = '時間枠 は更新されませんでした'
+      flash.now[:danger] = '予約枠 は更新されませんでした'
       render :edit
     end
   end
@@ -47,7 +56,7 @@ class AllocationsController < ApplicationController
     @allocation = Allocation.find(params[:id])
     @allocation.destroy
 
-    flash[:success] = '時間枠 は正常に削除されました'
+    flash[:success] = '予約枠 は正常に削除されました'
     redirect_to action: '/room/' + @allocation.room_id.to_s
   end
   
@@ -56,4 +65,18 @@ class AllocationsController < ApplicationController
   def allocation_params
     params.require(:allocation).permit(:room_id, :timeslot_id, :date, :status)
   end
+  
+  def send_allocations_csv(allocations)
+    csv_data = CSV.generate do |csv|
+      header = %w(room_id timeslot_id date status)
+      csv << header
+  
+      allocations.each do |allocation|
+        values = [allocation.room_id, allocation.timeslot_id, allocation.date, allocation.status]
+        csv << values
+      end
+    end
+    send_data(csv_data, filename: "allocations.csv")
+  end
+  
 end

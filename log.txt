@@ -66,6 +66,7 @@ res.each do |re|
     reserv_id.push(re.allocation_id)
 end
 
+# 一括登録
 (1..4).each do |num_room|
     (1..9).each do |num_timeslot|
         (6..9).each do |month|
@@ -75,3 +76,15 @@ end
         end
     end
 end
+
+#Herokuにアップロード後の操作
+# サイトに入って一人ユーザを作る
+# Herokuにデータを入れる。Postgresにローカルのterminal からデータを入れる
+heroku pg:psql -a si-facility-management-demo
+
+# データベースを操作する画面になったら
+select * from users;
+UPDATE users SET administrator= true WHERE id=1;
+select * from users;
+
+# で、管理者を一人作る。

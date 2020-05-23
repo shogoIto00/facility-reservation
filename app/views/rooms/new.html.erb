@@ -4,8 +4,10 @@
 
 <div class="row">
   <div class="col-sm-6 offset-sm-3">
-      
-
+    <div id="edit" style="margin:1em;">
+    <%= link_to "CSV出力", rooms_path(format: :csv), class: "btn" %>
+    </div>
+        
     <%= form_with(model: @room, local: true) do |f| %>
       <%= render 'layouts/error_messages', model: f.object %>
       <div class="form-group">
