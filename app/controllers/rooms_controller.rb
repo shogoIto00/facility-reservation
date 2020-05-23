@@ -74,11 +74,11 @@ class RoomsController < ApplicationController
   
   def send_rooms_csv(rooms)
     csv_data = CSV.generate do |csv|
-      header = %w(facility_id name purpose price maximum_capacity)
+      header = %w(id facility_id name purpose price maximum_capacity created_at updated_at)
       csv << header
   
       rooms.each do |room|
-        values = [room.facility_id, room.name, room.purpose, room.price, room.maximum_capacity]
+        values = [room.id, room.facility_id, room.name, room.purpose, room.price, room.maximum_capacity, room.created_at, room.updated_at]
         csv << values
       end
     end

@@ -61,11 +61,11 @@ class TimeslotsController < ApplicationController
   
   def send_timeslots_csv(timeslots)
     csv_data = CSV.generate do |csv|
-      header = %w(day_of_the_week time_start time_finish)
+      header = %w(id day_of_the_week time_start time_finish created_at updated_at)
       csv << header
   
       timeslots.each do |timeslot|
-        values = [timeslot.day_of_the_week, timeslot.time_start, timeslot.time_finish]
+        values = [timeslot.id, timeslot.day_of_the_week, timeslot.time_start, timeslot.time_finish, timeslot.created_at, timeslot.updated_at ]
         csv << values
       end
     end

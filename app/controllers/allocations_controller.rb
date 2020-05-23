@@ -68,11 +68,12 @@ class AllocationsController < ApplicationController
   
   def send_allocations_csv(allocations)
     csv_data = CSV.generate do |csv|
-      header = %w(room_id timeslot_id date status)
+      header = %w(id room_id timeslot_id date status created_at updated_at)
       csv << header
   
       allocations.each do |allocation|
-        values = [allocation.room_id, allocation.timeslot_id, allocation.date, allocation.status]
+        values = [allocation.id, allocation.room_id, allocation.timeslot_id, allocation.date, 
+        allocation.status, allocation.created_at, allocation.updated_at]
         csv << values
       end
     end

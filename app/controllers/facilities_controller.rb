@@ -66,11 +66,11 @@ class FacilitiesController < ApplicationController
   
   def send_facilities_csv(facilities)
     csv_data = CSV.generate do |csv|
-      header = %w(name address access)
+      header = %w(id name address access created_at updated_at)
       csv << header
   
       facilities.each do |facility|
-        values = [facility.name, facility.address, facility.access]
+        values = [facility.id, facility.name, facility.address, facility.access, facility.created_at, facility.updated_at]
         csv << values
       end
     end
