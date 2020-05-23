@@ -18,9 +18,7 @@
       <div class="card-header">
         <h3 class="card-title"><%= @facility.name %></h3>
       </div>
-      <div class="card-body">
-        <%= image_tag 'fa-' + @facility.id.to_s + '.jpg', :class => 'card-img-top'  %>
-      </div>
+      <%= image_tag 'fa-' + @facility.id.to_s + '.jpg', :class => 'card-img-top'  %>
     </div>
   </aside>
   <div class="col-sm-8">
@@ -41,12 +39,14 @@
       <% link = '/rooms/' + room.id.to_s %>
       <a href= <%= link %> >
           <div class="card" style="background-color:#91a0d8; color:white;">
-            <div class="card-body text-left">
+            <% if File.exists?('app/assets/images/fa-'+ room.facility_id.to_s + '_ro-' + (i+1).to_s + '.jpeg')  %>
               <%= image_tag 'fa-'+ room.facility_id.to_s + '_ro-' + (i+1).to_s + '.jpeg',  :class => 'card-img-top' %>
+            <% end %>
+            <div class="card-body text-left">
               <p class="card-text">名称：<%= room.name %></p>
               <p class="card-text">目的：<%= room.purpose %></p>
-              <p class="card-text">価格：<%= room.price %></p>
-              <p class="card-text">最大収容人数：<%= room.maximum_capacity %></p>
+              <p class="card-text">価格：<%= room.price %>円</p>
+              <p class="card-text">最大収容人数：<%= room.maximum_capacity %>人</p>
             </div>
           </div>
       </a>

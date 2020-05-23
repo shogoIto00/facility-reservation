@@ -19,9 +19,9 @@
       <div class="card-header">
         <h3 class="card-title"><%= @room.name %></h3>
       </div>
-      <div class="card-body">
+        <% if File.exists?('app/assets/images/fa-' + @room.facility.id.to_s + '_ro-' + @index.to_s + '.jpeg')  %>
         <%= image_tag 'fa-' + @room.facility.id.to_s + '_ro-' + @index.to_s + '.jpeg', :class => 'card-img-top'  %>
-      </div>
+        <% end %>
     </div>
   </aside>
   <div class="col-sm-8">
@@ -30,18 +30,14 @@
       </div>
       
       <div>
-          施設id：<%= @room.facility_id %>
-      </div>
-      
-      <div>
           目的：<%= @room.purpose %>
       </div>
       
       <div>
-          価格：<%= @room.price %>
+          価格：<%= @room.price %>円
       </div>
       <div>
-          最大収容人数：<%= @room.maximum_capacity %>
+          最大収容人数：<%= @room.maximum_capacity %>人
       </div>
   </div>
 </div>
