@@ -16,10 +16,14 @@
         <%= f.label :password, 'パスワード' %>
         <%= f.password_field :password, class: 'form-control' %>
       </div>
-
-      <%= f.submit 'ログイン', class: 'btn btn-primary btn-block' %>
+      
+      <div id='edit'>
+      <%= f.submit 'ログイン', class: 'btn btn-block' %>
+      </div>
     <% end %>
-
-    <p>新しくユーザを作成しますか？ <%= link_to '新規ユーザ登録', signup_path %></p>
+    
+    <div id="edit" style="margin:1em;">
+    <%= link_to '新しくユーザを作成する','/users/new', class: "btn"%>
+    </div>
   </div>
 </div>
