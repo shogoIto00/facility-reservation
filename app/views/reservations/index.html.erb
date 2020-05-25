@@ -5,9 +5,7 @@
 <h3>これからの予約</h3>
 <div class="card-columns">
   <% @reservations.each_with_index do |reservation,i| %>
-    <% link = '/reservations/' + reservation.id.to_s %>
     <div class="card" style="background-color:#91a0d8; color:white;">
-        <a href= <%= link %> >
         <div class="card-body text-left" style='color:white;'>
           <p class="card-text">施設名：<%= reservation.allocation.room.facility.name %> </p>
           <p class="card-text">部屋名：<%= reservation.allocation.room.name %></p>
@@ -16,16 +14,15 @@
           <p class="card-text">料金：<%= reservation.allocation.room.price %> 円</p>
           <p class="card-text">状況：<%= reservation.status %></p>
         </div>
-        </a>
       
       <div class="card-footer"style="background-color:#c1d3ea; color:white; text-align: right;">
-        <% if logged_in? %>
-          <% if @current_user.administrator %>
-            <a class = "btn btn-primary" href= <%="/reservations/" + reservation.id.to_s + '/edit'%> > 予約情報の更新 </a>
-          <% end %>
-        <% end %>
         <div id='edit'>
-        <button class='btn'><%= link_to 'キャンセル', reservation, method: :delete, data: { confirm: '本当にキャンセルしてよろしいですか？' } %></button>
+          <% if logged_in? %>
+            <% if @current_user.administrator %>
+              <a class = "btn" href= <%="/reservations/" + reservation.id.to_s + '/edit'%> > 予約情報の更新 </a>
+            <% end %>
+          <% end %>
+         <%= link_to 'キャンセル', reservation, method: :delete, data: { confirm: '本当にキャンセルしてよろしいですか？'},  :class=>"btn"  %>
         </div>
       </div>
     </div>

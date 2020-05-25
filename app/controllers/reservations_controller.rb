@@ -17,13 +17,16 @@ class ReservationsController < ApplicationController
   def new
     @reservation = Reservation.new
     @user = User.find_by(id: session[:user_id])
+    @allocation = Allocation.find(params[:allocation_id]);
+    
+    @judge = Reservation.where(allocation_id: @allocation.id).exists?;
   end
   
   def create
     @reservation = Reservation.new(reservation_params)
 
     if @reservation.save
-      flash[:success] = 'この内容で予約を行いました。ご登録ありがとうございました。'
+      flash[:success] = '下記内容で予約を行いました。ご登録ありがとうございました。'
       redirect_to @reservation
     else
       flash.now[:danger] = '予約は正常に登録されませんでした。'

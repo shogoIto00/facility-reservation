@@ -1,41 +1,51 @@
 <div class="text-center">
-  <h1  style="color:#91a0d8;"><i class="fas fa-calendar-check"></i> 予約確認</h1>
-</div>
-  <div id="edit" style="margin:1em;">
-    <%#= link_to '予約枠情報の更新',edit_allocation_path(@allocation), class: "btn"%>
-    <%#= link_to 'この予約枠を削除する', @allocation, method: :delete, data: { confirm: '本当に削除してよろしいですか？' }, class: "btn" %>
-  </div>
+  <h1  style="color:#91a0d8;"><i class="fas fa-calendar-check"></i> あなたの予約</h1>
 
 <div class="row">
-  <div id="edit" style="margin:1em;">
+  <div id="edit" style="margin-top:1em;">
     <% link_index = '/reservations/' %> 
-    <a href= <%= link_index %> > あなたの予約一覧を見る</a>
-    <a href= '/'> トップへ戻る</a>
+    <a href= <%= link_index %> class='btn' > 予約一覧</a>
+    <a href= '/' class='btn' > トップへ戻る</a>
   </div>
-  
-  <div class="col-sm-6 offset-sm-3">
-  
-    <div>
-        予約者：<%= @reservation.user.name %>
-    </div>
-
-    <div>
-        施設名：<%= @reservation.allocation.room.facility.name %>
-    </div>
-    
-    <div>
-        部屋名：<%= @reservation.allocation.room.name %>
-    </div>
-    
-    <div>
-        日時：<%= @reservation.allocation.date.month %>月 <%= @reservation.allocation.date.day %>日
-              <%= @reservation.allocation.timeslot.time_start.hour %>:00 ~ <%= @reservation.allocation.timeslot.time_finish.hour %>:00
-    </div>
-    
-    <div>
-        料金：<%= @reservation.allocation.room.price %> 円
-    </div>
-  </div>
-  
 </div>
+
+<div class="container">
+<div class="row justify-content-center">
+  <div class="col-sm-6">
+   <table class="mt-4 table table-striped table-bordered justify-content-center">
+    <thead>
+      <tr>
+        <th colspan=2 style='text-align: center;  background-color: #91a0d8; color: #495152 ;'>予約内容</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>予約者</td>
+        <td style='text-align: left;'><%= @reservation.user.name %></td>
+      </tr>
+      <tr>
+        <td >場所</td>
+        <% link_facility = 'facilities/' + @reservation.allocation.room.facility_id.to_s %>
+        <% link_room = 'rooms/' + @reservation.allocation.room_id.to_s %>
+        <td style='text-align: left;'> 
+          <a href= <%= link_facility %> >  <%= @reservation.allocation.room.facility.name %>  </a> 
+          <a href= <%= link_room %> > <%= @reservation.allocation.room.name %>  </a>  
+        </td>
+      </tr>
+      <tr>
+        <td>日時</td>
+        <td style='text-align: left;'><%= @reservation.allocation.date.month %>月 <%= @reservation.allocation.date.day %>日
+              <%= @reservation.allocation.timeslot.time_start.hour %>:00 ~ <%= @reservation.allocation.timeslot.time_finish.hour %>:00</td>
+      </tr>
+      <tr>
+        <td>料金</td>
+        <td style='text-align: left;'><%= @reservation.allocation.room.price %> 円</td>
+      </tr>
+    </tbody>
+  </table>
+  </div>
+</div>
+</div>
+  
+
 

@@ -61,6 +61,7 @@
         <tr>
           <% for i in 0..6 %>
             <% tmp = @allocations.detect{|allocation| allocation.date.day.to_s == (Date.current + i.day).day.to_s && allocation.timeslot.time_start.hour ==  (k+9)}  %>
+            <% yourtmp = @your_allocations.detect{|allocation| allocation.date.day.to_s == (Date.current + i.day).day.to_s && allocation.timeslot.time_start.hour ==  (k+9)}  %>
             <% if !tmp.nil?  %>
               <td style='background-color:#c1d3ea;'>
                 <% link = 'reservation/new/' + tmp.id.to_s %>
@@ -71,7 +72,11 @@
                 <% end %>
               </td>
             <% else %>
-              <td style='background-color:#EEEEEE;'><a style='color: #AAAAAA ; vertical-align: middle;'><s> <%= (k+9).to_s + ':00 ' %>  </s></a> </td>
+              <% if !yourtmp.nil?  %>
+                <td style='background-color:#f29368;'><a href= 'reservations' style='color: #1f50c7; vertical-align: middle;'> 予約済み </a> </td>
+              <% else %>
+                <td style='background-color:#EEEEEE;'><a style='color: #AAAAAA ; vertical-align: middle;'><s> <%= (k+9).to_s + ':00 ' %>  </s></a> </td>
+              <% end %>
             <% end %>
           <% end %>
         </tr>

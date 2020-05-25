@@ -2,22 +2,33 @@
   <h1  style="color:#91a0d8;"><i class="fas fa-user"></i>ユーザ情報</h1>
 </div>
 
-<div class="row">
+<div class="row" style="margin-top:1em;">
   <div class="col-sm-6 offset-sm-3">
-      <div>
-          氏名：<%= @user.name %>
-      </div>
-      
-      <div>
-          メール：<%= @user.email %>
-      </div>
-      
-      <div>
-          パスワード：**********
-      </div>
-      
-      <div id="edit" style="margin:1em;">
-     <%= link_to 'ユーザ情報編集',edit_user_path(@user), class: "btn"%>
-     </div>
+    <table class="mt-4 table table-striped table-bordered justify-content-center">
+      <thead>
+        <tr>
+          <th colspan=2 style='text-align: center;  background-color: #91a0d8; color: #495152 ;'>プロファイル</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>氏名</td>
+          <td> <%= @user.name %> </td>
+        </tr>
+        <tr>
+          <td>メール</td>
+          <td> <%= @user.email %> </td>
+        </tr>
+        <tr>
+          <td>パスワード</td>
+          <td> ********** </td>
+        </tr>
+        <tr>
+      </tbody>
+   </table>
+    <div id="edit" style="margin-top:1em; text-align: right;">
+       <%= link_to 'ユーザ情報編集',edit_user_path(@user), class: "btn"%>
+    </div>
   </div>
 </div>
+

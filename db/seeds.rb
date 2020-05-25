@@ -5,7 +5,7 @@
 #
 #   movies = Movie.create([{ name: 'Star Wars' }, { name: 'Lord of the Rings' }])
 #   Character.create(name: 'Luke', movie: movies.first)
-(1..7).each do |num_room|
+(1..9).each do |num_room|
     (1..9).each do |num_timeslot|
         (6..12).each do |month|
             (1..30).each do |day|

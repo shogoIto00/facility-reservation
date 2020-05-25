@@ -19,12 +19,21 @@ class RoomsController < ApplicationController
     
     from  = Time.current.at_beginning_of_day
     to = (from + 7.day).at_end_of_day
-    @resercatioin = Reservation.all
+    @reservatioin = Reservation.all
     @re_id = []
-    @resercatioin.each do |re| 
+    @reservatioin.each do |re| 
       @re_id.push(re.allocation_id)
     end
+    
+    @your_re_id = []
+    @reservatioin.each do |re| 
+      if re.user_id == current_user.id
+        @your_re_id.push(re.allocation_id)
+      end
+    end
+    
     @allocations = Allocation.where(room_id: params[:id], date: from...to).where.not(id: @re_id)
+    @your_allocations = Allocation.where(room_id: params[:id], date: from...to).where(id: @your_re_id)
   end
   
   def new

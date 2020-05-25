@@ -88,3 +88,9 @@ UPDATE users SET administrator= true WHERE id=1;
 select * from users;
 
 # で、管理者を一人作る。
+
+# githubで適宜更新
+git status
+ git diff
+git add .
+git commit -m 'message model'
