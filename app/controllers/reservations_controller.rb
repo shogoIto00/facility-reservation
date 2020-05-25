@@ -6,18 +6,17 @@ class ReservationsController < ApplicationController
     if @current_user.administrator
       @reservations = Reservation.all
     else
-      from  = Time.current.at_beginning_of_day
       #@reservations = Reservation.where(user_id: @current_user.id)
       @reservations = Reservation.where(user_id: @current_user.id);
-      
-      @future_reservation = []
-      @past_reservation = []
-      @reservations.each_with_index do |reservation,i|
-        if reservation.allocation.date <= from  
-          @past_reservation.push(reservation) ;
-        else
-          @future_reservation.push(reservation) ;
-        end
+    end
+    from  = Time.current.at_beginning_of_day
+    @future_reservation = []
+    @past_reservation = []
+    @reservations.each_with_index do |reservation,i|
+      if reservation.allocation.date <= from  
+        @past_reservation.push(reservation) ;
+      else
+        @future_reservation.push(reservation) ;
       end
     end
   end
