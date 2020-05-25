@@ -6,7 +6,6 @@ class ReservationsController < ApplicationController
     if @current_user.administrator
       @reservations = Reservation.all
     else
-      #@reservations = Reservation.where(user_id: @current_user.id)
       @reservations = Reservation.where(user_id: @current_user.id);
     end
     from  = Time.current.at_beginning_of_day
