@@ -4,7 +4,7 @@
 
 <h3>これからの予約</h3>
 <div class="card-columns">
-  <% @reservations.each_with_index do |reservation,i| %>
+  <% @future_reservation.each_with_index do |reservation,i| %>
     <div class="card" style="background-color:#91a0d8; color:white;">
         <div class="card-body text-left" style='color:white;'>
           <p class="card-text">施設名：<%= reservation.allocation.room.facility.name %> </p>
@@ -31,6 +31,22 @@
 </div>
 
 <h3 style='margin-top: 1em;'>これまでの予約</h3>
+<div class="card-columns">
+  <% @past_reservation.each_with_index do |reservation,i| %>
+    <div class="card" style="background-color:#91a0d8; color:white;">
+      <div class="card-body text-left" style='color:white;'>
+        <p class="card-text">施設名：<%= reservation.allocation.room.facility.name %> </p>
+        <p class="card-text">部屋名：<%= reservation.allocation.room.name %></p>
+        <p class="card-text">日時：<%= reservation.allocation.date.month %>月 <%= reservation.allocation.date.day %>日
+        <%= reservation.allocation.timeslot.time_start.hour %>:00 ~ <%= reservation.allocation.timeslot.time_finish.hour %>:00
+        <p class="card-text">料金：<%= reservation.allocation.room.price %> 円</p>
+        <p class="card-text">状況：<%= reservation.status %></p>
+      </div>
+    </div>
+  <% end %>
+  
+</div>
+      
 
 <div id="edit" style="margin:1em;">
 <a class="btn btn-md" href="/" role="button" style="margin:1em;">トップに戻る</a>

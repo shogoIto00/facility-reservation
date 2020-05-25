@@ -91,6 +91,6 @@ select * from users;
 
 # githubで適宜更新
 git status
- git diff
+git diff
 git add .
-git commit -m 'message model'
+git commit -m 'additional revise'
