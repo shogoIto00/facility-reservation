@@ -27,8 +27,10 @@ class RoomsController < ApplicationController
     
     @your_re_id = []
     @reservatioin.each do |re| 
-      if re.user_id == current_user.id
-        @your_re_id.push(re.allocation_id)
+      if logged_in?
+        if re.user_id == current_user.id
+          @your_re_id.push(re.allocation_id)
+        end
       end
     end
     
