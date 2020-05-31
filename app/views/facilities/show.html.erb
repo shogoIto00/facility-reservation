@@ -18,7 +18,10 @@
       <div class="card-header">
         <h3 class="card-title"><%= @facility.name %></h3>
       </div>
-      <%= image_tag 'fa-' + @facility.id.to_s + '.jpg', :class => 'card-img-top'  %>
+      <% if @facility.facility_photo.attached? %>
+        <%= image_tag @facility.facility_photo %>
+      <% end %>
+      <%#= image_tag 'fa-' + @facility.id.to_s + '.jpg', :class => 'card-img-top'  %>
     </div>
   </aside>
   <div class="col-sm-8">

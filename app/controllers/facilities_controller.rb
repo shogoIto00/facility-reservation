@@ -61,7 +61,7 @@ class FacilitiesController < ApplicationController
   private
   
   def facility_params
-    params.require(:facility).permit(:name, :address, :access, :photo)
+    params.require(:facility).permit(:name, :address, :access, :facility_photo)
   end
   
   def send_facilities_csv(facilities)
